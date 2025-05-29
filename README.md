@@ -3,6 +3,8 @@
 <img src="assets/images/triacore-logo.png">
 Triacore é uma carteira móvel de criptomoedas desenvolvida em Flutter, com foco em Bitcoin e ativos da Liquid Network, além de integração ao PIX (sistema de pagamentos instantâneos do Brasil).
 
+[![Download APK](https://img.shields.io/badge/Download-APK-brightgreen.svg)](https://github.com/TriaCoreBR/triawallet/releases/latest/download/app-release.apk)
+
 ## Funcionalidades
 
 - **Suporte Multichain**: Compatível com Bitcoin e Liquid Network
