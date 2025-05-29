@@ -4,7 +4,7 @@ import 'package:triacore_mobile/models/sideswap.dart';
 import 'package:triacore_mobile/services/sideswap.dart';
 
 const String apiKey =
-    "5c85504bf60e13e0d58614cb9ed86cb2c163cfa402fb3a9e63cf76c7a7af46a1";
+    "7bfc3ee921d773c11c96de0c5955c68af719e3fbf2e814b072fd6885c89de22f";
 
 /// Repository that handles communication with the SideSwap API
 /// and transforms JSON data into model objects

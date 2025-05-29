@@ -22,8 +22,9 @@ class PixQrDisplay extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondary,
+            color: Colors.black,
             borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.white, width: 1.0),
           ),
           child: GestureDetector(
             onTap: () {
@@ -43,7 +44,7 @@ class PixQrDisplay extends StatelessWidget {
                   child: SelectableText(
                     qrCopyPaste,
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.onSecondary,
+                      color: Colors.white,
                       fontFamily: "roboto",
                       fontSize: 16,
                     ),

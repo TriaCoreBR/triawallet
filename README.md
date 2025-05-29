@@ -41,8 +41,8 @@ Triacore is built with a modern Flutter architecture:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/triacore-app/triacore-client.git
-   cd triacore-client
+   git clone https://github.com/TriaCoreBR/triabank.git
+   cd triabank
    ```
 
 2. Install dependencies:
@@ -97,3 +97,5 @@ This project is licensed under the [GNU General Public License](LICENSE).
 - Bitcoin Development Kit (BDK) team
 - Bull Bitcoin for Dart bindings for LWK
 - SideSwap for swap functionality
+- mooze-labs/mooze-client for inspiration and code
+

@@ -172,6 +172,15 @@ class ReceivePixState extends ConsumerState<ReceivePixScreen> {
         return false;
       }
 
+      if (_userDetails == null) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Erro ao carregar os limites da conta")),
+          );
+        }
+        return false;
+      }
+      
       if (amount > _userDetails!.allowedSpending) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Limite de transação excedido.")),
@@ -338,14 +347,14 @@ class ReceivePixState extends ConsumerState<ReceivePixScreen> {
             if (liquidAssets.isNotEmpty &&
                 MediaQuery.of(context).viewInsets.bottom == 0)
               _assetDropdown(context, liquidAssets),
-            PixInputAmount(
-              amountController: amountController,
-              userDetails: _userDetails,
-              onChanged:
-                  (
-                    text,
-                  ) {}, // Empty callback since we're using the controller's listener
-            ),
+            if (_userDetails != null) 
+              PixInputAmount(
+                amountController: amountController,
+                userDetails: _userDetails!,
+                onChanged: (text) {}, // Empty callback since we're using the controller's listener
+              )
+            else
+              const CircularProgressIndicator(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

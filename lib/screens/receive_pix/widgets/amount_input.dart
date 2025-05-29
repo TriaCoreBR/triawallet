@@ -106,7 +106,7 @@ class _PixInputAmountState extends ConsumerState<PixInputAmount> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  "Limite por transação atual: R\$ ${(widget.userDetails!.allowedSpending.toDouble() / 100).toStringAsFixed(2)}",
+                  "Limite por transação atual: R\$ ${(widget.userDetails!.allowedSpending / 100).toStringAsFixed(2)}",
                   style: TextStyle(fontFamily: "roboto", fontSize: 16),
                 ),
                 GestureDetector(

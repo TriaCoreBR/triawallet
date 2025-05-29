@@ -28,12 +28,18 @@ class TransactionInfo extends ConsumerWidget {
             style: TextStyle(
               fontFamily: "roboto",
               fontSize: 16,
+              color: Colors.white, // Rótulo em branco
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
             value,
-            style: TextStyle(fontFamily: "roboto", fontSize: 16),
+            style: TextStyle(
+              fontFamily: "roboto", 
+              fontSize: 16,
+              color: Colors.green, // Valor em verde
+              fontWeight: FontWeight.bold,
+            ),
             overflow: TextOverflow.ellipsis,
           ),
         ],
@@ -113,8 +119,9 @@ class TransactionInfo extends ConsumerWidget {
                 return Container(
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: Colors.black,
                     borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.white, width: 1.0),
                   ),
                   child: Column(
                     children: [

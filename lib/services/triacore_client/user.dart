@@ -1,10 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-
 import 'package:http/http.dart' as http;
-import 'package:triacore_mobile/services/triacore_client/registration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:triacore_mobile/models/user.dart';
 
 class UserService {
@@ -18,74 +15,76 @@ class UserService {
     return userId;
   }
 
+  // Get headers for HTTP requests
+  Future<Map<String, String>> _getHeaders() async {
+    return {
+      'Content-Type': 'application/json',
+      // Add other headers if needed
+    };
+  }
+
+  // Get FCM token from shared preferences
+  Future<String?> getFcmToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('fcm_token');
+  }
+
+  // Register a new user
+  Future<bool> registerUser(String hashedDescriptor, String? fcmToken) async {
+    try {
+      final url = Uri.https(backendUrl, '/api/register');
+      final response = await http.post(
+        url,
+        headers: await _getHeaders(),
+        body: jsonEncode({
+          'hashed_descriptor': hashedDescriptor,
+          'fcm_token': fcmToken,
+        }),
+      );
+      return response.statusCode == 200 || response.statusCode == 201;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // Get user details
   Future<User?> getUserDetails() async {
-    if (kDebugMode) {
-      print("=== GET USER DETAILS STARTED ===");
-    }
-
     final userId = await getUserId();
-
-    if (kDebugMode) {
-      print("Fetching user details:");
-      print("User ID: $userId");
-    }
-
+    
     if (userId == null) {
-      if (kDebugMode) {
-        print("No user ID found, returning null");
-      }
       return null;
     }
-
-    final url = Uri.https(backendUrl, "/users/$userId");
-    if (kDebugMode) {
-      print("Making request to: $url");
-    }
-
-    final response = await http.get(url);
-
-    if (kDebugMode) {
-      print("User details API response:");
-      print("Status code: ${response.statusCode}");
-      print("Response body: ${response.body}");
-    }
-
-    if (response.statusCode == 200) {
-      if (kDebugMode) {
-        print("User found, returning user details");
-      }
-      final data = jsonDecode(response.body);
-      return User.fromJson(data["data"]);
-    } else if (response.statusCode == 404) {
-      if (kDebugMode) {
-        print("=== USER NOT FOUND, ATTEMPTING REGISTRATION ===");
-      }
-      final sharedPrefs = await SharedPreferences.getInstance();
-      final hashedDescriptor = sharedPrefs.getString('hashed_descriptor');
-      if (hashedDescriptor == null) {
-        if (kDebugMode) {
-          print("No hashed descriptor found, returning null");
-        }
-        return null;
-      }
-
-      final registrationService = RegistrationService(backendUrl: backendUrl);
-      final registrationResult = await registrationService.registerUser(
-        hashedDescriptor,
-        null,
+    
+    try {
+      final url = Uri.https(backendUrl, '/user/$userId');
+      final response = await http.get(
+        url,
+        headers: await _getHeaders(),
       );
-
-      if (kDebugMode) {
-        print("Registration result: $registrationResult");
-        print("Retrying user details fetch after registration...");
+      
+      if (response.statusCode == 200) {
+        return User.fromJson(jsonDecode(response.body)['data']);
+      } else if (response.statusCode == 404) {
+        // If user not found, try to register
+        final prefs = await SharedPreferences.getInstance();
+        final hashedDescriptor = prefs.getString('hashed_descriptor');
+        
+        if (hashedDescriptor == null) {
+          return null;
+        }
+        
+        final registrationResult = await registerUser(
+          hashedDescriptor,
+          await getFcmToken(),
+        );
+        
+        // Retry getting user details after registration
+        if (registrationResult) {
+          return await getUserDetails();
+        }
       }
-      return await getUserDetails();
-    } else {
-      if (kDebugMode) {
-        print('=== FAILED TO FETCH USER DETAILS ===');
-        print('Status code: ${response.statusCode}');
-        print('Response body: ${response.body}');
-      }
+      return null;
+    } catch (e) {
       return null;
     }
   }
