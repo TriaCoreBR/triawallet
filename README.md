@@ -1,66 +1,65 @@
-# triacore-client
+# triacore
 
-Triacore is a mobile cryptocurrency wallet built with Flutter that focuses on Bitcoin and Liquid network assets, with integrated PIX (Brazilian instant payment system) support.
+<img src="assets/images/triacore-logo.png">
+Triacore é uma carteira móvel de criptomoedas desenvolvida em Flutter, com foco em Bitcoin e ativos da Liquid Network, além de integração ao PIX (sistema de pagamentos instantâneos do Brasil).
 
-![Triacore Logo](assets/images/triacore-logo.png)
+## Funcionalidades
 
-## Features
+- **Suporte Multichain**: Compatível com Bitcoin e Liquid Network
+- **Integração com PIX**: Permite conversão fácil entre criptomoedas e Real (BRL)
+- **Gestão de Ativos**: Visualize e administre diferentes criptomoedas
+- **Troca de Tokens**: Faça swaps entre ativos da Liquid Network
+- **Modo Loja**: Interface dedicada para comerciantes receberem pagamentos
 
-- **Multi-chain Support**: Bitcoin and Liquid Network
-- **PIX Integration**: Seamlessly convert between cryptocurrencies and Brazilian Real (BRL)
-- **Asset Management**: View and manage multiple cryptocurrencies
-- **Token Swaps**: Exchange between different Liquid Network assets
-- **Store Mode**: Dedicated interface for merchants to receive payments
-
-## Supported Assets
+## Ativos Compatíveis
 
 - Bitcoin (BTC)
 - Liquid Bitcoin (L-BTC)
-- Depix (DEPIX) on Liquid Network
-- Tether USD (USDT) on Liquid Network
+- Depix (DEPIX) na Liquid Network
+- Tether USD (USDT) na Liquid Network
 
-## Architecture
+## Arquitetura
 
-Triacore is built with a modern Flutter architecture:
+Triacore utiliza uma arquitetura moderna baseada em Flutter:
 
-- **Flutter & Dart**: UI framework and programming language
-- **Riverpod**: State management solution
-- **BDK** (Bitcoin Development Kit): Bitcoin wallet functionality
-- **LWK** (Liquid Wallet Kit): Liquid Network wallet functionality
-- **Secure Storage**: For seed phrases and private keys
+- **Flutter & Dart**: Framework e linguagem principal
+- **Riverpod**: Gerenciamento de estado
+- **BDK** (Bitcoin Development Kit): Funcionalidades de carteira Bitcoin
+- **LWK** (Liquid Wallet Kit): Suporte à carteira da Liquid Network
+- **Armazenamento Seguro**: Guarda frases-semente e chaves privadas de modo protegido
 
-## Getting Started
+## Primeiros Passos
 
-### Prerequisites
+### Pré-requisitos
 
-- Flutter SDK (2.10.0 or higher)
-- Dart SDK (2.16.0 or higher)
-- Android Studio / Xcode for native development
+- Flutter SDK (versão 2.10.0 ou superior)
+- Dart SDK (versão 2.16.0 ou superior)
+- Android Studio ou Xcode para desenvolvimento nativo
 
-### Setup
+### Instalação
 
-1. Clone the repository:
+1. Clone o repositório:
    ```bash
    git clone https://github.com/TriaCoreBR/triabank.git
    cd triabank
    ```
 
-2. Install dependencies:
+2. Instale as dependências:
    ```bash
    flutter pub get
    ```
 
-3. Run code generation:
+3. Gere o código necessário:
    ```bash
    dart pub run build_runner build --delete-conflicting-outputs
    ```
 
-4. Run the app:
+4. Execute o aplicativo:
    ```bash
    flutter run
    ```
 
-### Building for Production
+### Compilando para Produção
 
 #### Android
 ```bash
@@ -72,30 +71,30 @@ flutter build apk --release
 flutter build ios --release
 ```
 
-## Security Notes
+## Notas de Segurança
 
-- Never share your mnemonic phrase or PIN with anyone
-- The app securely stores sensitive information using native secure storage
-- Transactions are signed locally on your device - private keys never leave your phone
+- Nunca compartilhe sua frase mnemônica ou PIN com terceiros
+- O aplicativo armazena informações sensíveis de forma segura usando recursos nativos do sistema
+- Todas as transações são assinadas localmente — as chaves privadas nunca saem do seu dispositivo
 
-## Contributing
+## Como Contribuir
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Sua colaboração é bem-vinda! Envie um Pull Request seguindo os passos abaixo:
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1. Faça um fork do projeto
+2. Crie uma branch para sua funcionalidade (`git checkout -b feature/nova-funcionalidade`)
+3. Realize seus commits (`git commit -m 'Adiciona nova funcionalidade'`)
+4. Envie para o repositório remoto (`git push origin feature/nova-funcionalidade`)
+5. Abra um Pull Request
 
-## License
+## Licença
 
-This project is licensed under the [GNU General Public License](LICENSE).
+Este projeto está sob a [Licença Pública Geral GNU](LICENSE).
 
-## Acknowledgements
+## Agradecimentos
 
-- Bitcoin Development Kit (BDK) team
-- Bull Bitcoin for Dart bindings for LWK
-- SideSwap for swap functionality
-- mooze-labs/mooze-client for inspiration and code
+- Equipe do Bitcoin Development Kit (BDK)
+- Bull Bitcoin pelas bindings Dart do LWK
+- SideSwap pelo sistema de swaps
+- mooze-labs/mooze-client pela inspiração e código
 
